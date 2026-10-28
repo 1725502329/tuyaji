@@ -295,7 +295,8 @@
     petArt: $('#petArt'),
     petSvg: $('#petSvg'),
     petPhoto: $('#petPhoto'),
-    photoTip: $('#photoTip'),
+    missingPet: $('#missingPet'),
+    missingLoadBtn: $('#missingLoadBtn'),
     petHit: $('#petHit'),
     petNameTag: $('#petNameTag'),
     spongeCursor: $('#spongeCursor'),
@@ -833,7 +834,14 @@
       /* The original image can still load from its file path. */
     }
 
+    // The image already lives in the deployed GitHub repo. Use the public
+    // Pages URL first (same-origin, so it can be made transparent in Canvas),
+    // then the raw GitHub URL, then local-file fallbacks.
+    sources.push('https://1725502329.github.io/tuyaji/doodle-petpet-original.jpg');
+    sources.push('https://raw.githubusercontent.com/1725502329/tuyaji/main/doodle-petpet-original.jpg');
     sources.push('pet-original.jpg');
+    sources.push('doodle-petpet-original.jpg');
+    sources.push('doodle-petpet-original.png');
     if (photo.dataset.originalSrc) sources.push(photo.dataset.originalSrc);
 
     let sourceIndex = 0;
@@ -854,7 +862,13 @@
       els.petArt.classList.add('has-photo');
       photo.removeAttribute('aria-hidden');
       els.petSvg.setAttribute('aria-hidden', 'true');
-      if (els.photoTip) els.photoTip.hidden = true;
+      if (els.missingPet) els.missingPet.hidden = true;
+      els.stage.classList.remove('is-missing');
+    };
+
+    const showMissing = () => {
+      if (els.missingPet) els.missingPet.hidden = false;
+      els.stage.classList.add('is-missing');
     };
 
     const useFallback = () => {
@@ -863,7 +877,7 @@
       photo.hidden = true;
       photo.setAttribute('aria-hidden', 'true');
       els.petSvg.removeAttribute('aria-hidden');
-      if (els.photoTip) els.photoTip.hidden = false;
+      showMissing();
     };
 
     const tryNextSource = () => {
@@ -885,7 +899,7 @@
 
     setTimeout(() => {
       if (!els.petArt.classList.contains('has-photo') && !photo.complete) {
-        if (els.photoTip) els.photoTip.hidden = false;
+        showMissing();
       }
     }, 1800);
 
@@ -2108,7 +2122,7 @@
       const openPhotoPicker = () => els.photoInput.click();
 
       els.loadPhotoBtn.addEventListener('click', openPhotoPicker);
-      if (els.photoTip) els.photoTip.addEventListener('click', openPhotoPicker);
+      if (els.missingLoadBtn) els.missingLoadBtn.addEventListener('click', openPhotoPicker);
 
       els.photoInput.addEventListener('change', () => {
         const file = els.photoInput.files && els.photoInput.files[0];

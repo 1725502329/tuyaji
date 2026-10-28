@@ -125,7 +125,14 @@
             <i class="speech-tail" aria-hidden="true"></i>
           </div>
 
-          <button class="photo-tip" id="photoTip" type="button" hidden>原图未显示 · 点此载入</button>
+          <div class="missing-pet" id="missingPet" hidden>
+            <div class="missing-card" role="dialog" aria-labelledby="missingTitle" aria-describedby="missingDesc">
+              <div class="missing-kicker">ORIGINAL IMAGE NEEDED</div>
+              <h2 id="missingTitle">原图还没有加载</h2>
+              <p id="missingDesc">通过网址打开时，浏览器读不到电脑里的原图附件。点下面，从相册选择这张涂鸦鸡一次；选完会保存在浏览器里，下次自动显示。</p>
+              <button class="primary-btn small" id="missingLoadBtn" type="button">从相册选择原图</button>
+            </div>
+          </div>
 
           <!-- pet -->
           <div class="pet-zone" id="petZone">

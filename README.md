@@ -13,12 +13,16 @@
 也可以直接用浏览器打开 `index.html`。页面会按以下顺序找原图：
 
 1. 浏览器里已经保存过的原图（`localStorage`）；
-2. 游戏目录里的 `pet-original.jpg`；
-3. 原始附件路径（`file:///C:/Users/Administrator/.dsh/attachments/...`）。
+2. 已部署仓库里的公开图片：`https://1725502329.github.io/tuyaji/doodle-petpet-original.jpg`；
+3. 同一图片的 raw GitHub 地址；
+4. 游戏目录里的 `pet-original.jpg`；
+5. 原始附件路径（`file:///C:/Users/Administrator/.dsh/attachments/...`）。
 
 如果希望完全离线、或通过 `http://` 打开，也可以**单独双击一次 `copy-original.cmd`**，只复制 `pet-original.jpg` 而不打开游戏。之后游戏优先使用这个本地文件，刷新即可。
 
-如果三种路径都不可用，画面会提示「原图未显示」，不会显示任何重绘版本；点一下提示（或玩法说明里的「载入原图」）选择原图文件即可。选一次后会存进浏览器，下次自动使用。
+如果三种路径都不可用，画面会显示一张很大的「原图还没有加载」提示卡，不会显示任何重绘版本；点「从相册选择原图」（或玩法说明里的「载入原图」）选择原图文件即可。选一次后会存进浏览器，下次自动使用。
+
+> **部署注意**：仓库里已经有 `doodle-petpet-original.jpg`，代码会优先从 `https://1725502329.github.io/tuyaji/doodle-petpet-original.jpg` 加载它，所以手机上不需要再从相册选图。只要把最新的 `index.html`、`styles.css`、`game.js` 重新上传到 `tuyaji` 仓库，等 GitHub Pages 部署完成后刷新即可。
 
 ## 可以做什么
 
